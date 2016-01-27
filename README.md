@@ -11,3 +11,4 @@ Run bundle install.
 Start a Postgres instance on your machine.
 Run a Rails server - rails s
 Run command webpack-dev-server —start
+Visit localhost:3000
