@@ -1,0 +1,7 @@
+Java Projects included, 
+Car Garage - A user can add update and delete vehicles.
+Client Server - A working example of the communication between Clients and Servers.
+Connect4 - The game connect four with sound
+JavaJDBC - A more detailed look into Client and Servers.
+RMI Calculator - A Java RMI Calculator.
+Music Player - A music media player displaying images and data on artists. username = ollie  password = ollie
