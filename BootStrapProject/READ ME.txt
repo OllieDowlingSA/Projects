@@ -1,0 +1,1 @@
+Landing Page - A landing page application wrapped in responsive web design using the Bootstrap Framework.
