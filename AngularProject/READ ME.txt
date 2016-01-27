@@ -1,0 +1,3 @@
+This Project has to run on a server namely localhost.
+Single page view application - An single page view application which uses angularJS 
+wrapped in responsive web design using the Bootstrap Framework.
