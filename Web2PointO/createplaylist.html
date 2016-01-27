@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="shortcut icon" href="img/favicon.ico">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Welcome to SoundBranch</title>
+<link rel="stylesheet" href="css/foundation.css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" /> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><!-- Import Library -->
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<script src="js/vendor/modernizr.js">
+</script>
+<title>JSON Sample</title>
+</head>
+<style type="text/css">
+#share-buttons img {
+	width: 45px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}	
+</style>
+
+<body>
+<div class="off-canvas-wrap" data-offcanvas> <!-- add the off canvas menu -->
+<div class="inner-wrap">
+<nav class="tab-bar">
+<section class="left-small">
+<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+
+<section class="middle tab-bar-section"> <!-- add title to top bar -->
+<h1 class="title"><span>SoundBranch API</span></a></h1>
+</section>
+
+<section class="right-small">
+<a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+</nav>
+
+<aside class="left-off-canvas-menu"> <!-- Use off canvas wrap left -->
+<ul class="off-canvas-list">
+<li><label>SoundBranch</label></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="trending.html">Trending</a></li>
+<li><a href="images.html">Image search</a></li>
+<li><a href="blogs.html">Blog search</a></li>
+<li><a href="tracks.html">View top Tracks</a></li>
+<li><a href="albums.html">View top Albums</a></li>
+<li><a href="sm2player.html">Listen</a></li>
+<li><a href="api.html">API</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+</aside>
+
+<aside class="right-off-canvas-menu"> <!-- Use of canvas wrap right -->
+<ul class="off-canvas-list">
+<li><label>Docs Navigation</label></li>
+<li><a href="getinfo.html">Get Info Method</a></li>
+<li><a href="deezerplay.html">Playlist Demo Method</a></li>
+<li><a href="gettopalbums.html">Get Top Albums Method</a></li>
+<li><a href="gettoptracks.html">Get Top Tracks Method</a></li>
+<li><a href="blogtest.html">Get Blogs Method</a></li>
+<li><a href="api.html">Api Home</a></li>
+</ul>
+</aside>
+
+<div class="row">  
+<div class="large-8 columns">
+<div class="panel callout radius"> <!-- add rounded panel blue with text and URL link -->
+<h1>Sample JSON</h1>
+<p>
+The SoundBranch sample API is a service that was designed for easy exploration and use.  
+It is for developers who want to get started using API's with a simple approach to methods and JSON DATA 
+and sample code with explanations.
+<pre><a href="http://developer.echonest.com/api/v4/playlist/basic?api_key=FILDTEOIK2HBORODV&artist=Weezer&format=json&results=20&type=artist-radio">JSON Sample Response</a></pre>
+</p>
+</div>
+</div>
+
+<div class="large-4 columns">
+<img src="img/tree12.png" alt="smile" id="imgSmile">
+</div>
+</div>
+<script>
+$(document).ready(function(){ <!-- Animate image to 500px and back to 250px slow -->
+	$('#imgSmile').width(250);
+	$('#imgSmile').mouseover(function()
+			{
+		$(this).css("cursor","pointer");
+		$(this).animate({width: "500px"}, 'slow');
+			});
+
+	$('#imgSmile').mouseout(function()
+			{   
+		$(this).animate({width: "250px"}, 'slow');
+			});
+});
+</script>
+
+<div class="row">  
+<div class="large-12 columns">
+<pre class="prettyprint">	
+<h4>Sample JSON Response from the echonest api for artist blogs first 10 results are returned.</h4>
+<div class= "panel callout radius">
+<div id="json">
+</div></pre>
+</div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script> <!-- Read in JSON data from the echo nest API and render to page using stringify and indent by 1 space -->
+$.getJSON("http://developer.echonest.com/api/v4/playlist/basic?api_key=MN1A1GKCIRHD92GZ4&artist=Weezer&format=json&results=20&type=artist-radio", function(data) {
+	document.getElementById("json").innerHTML =(JSON.stringify(data, undefined, 1))
+});
+</script>
+
+<div class="row">
+<!-- <div class="large-12 columns"> -->
+<h3></h3>
+<ul class="small-block-grid-4"> <!-- Small block grid to resize and stay inline horizontally -->
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+</ul>
+</div>
+
+<div id="share-buttons"> <!-- Add social media buttons -->
+<div class="row">
+<div class="large-6 columns">
+
+<!-- Facebook -->
+<a href="http://www.facebook.com/sharer.php?u=http://soundbranch.net/" target="_blank"><img src="img/facebook.png" alt="Facebook" /></a>
+
+<!-- Twitter -->
+<a href="http://twitter.com/share?url=http://soundbranch.net/&text=SoundBranch&hashtags=SoundBranch.net" target="_blank"><img src="img/twitter.png" alt="Twitter" /></a>
+
+<!-- Google+ -->
+<a href="https://plus.google.com/share?url=http://soundbranch.net/" target="_blank"><img src="img/google.png" alt="Google" /></a>
+
+<!-- LinkedIn -->
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://soundbranch.net/" target="_blank"><img src="img/linkedin.png" alt="LinkedIn" /></a>
+
+<!-- Pinterest -->
+<a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"><img src="img/pinterest.png" alt="Pinterest" /></a>
+</div>
+</div>
+</div>
+
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+$(document).foundation();
+</script>
+</section>
+
+<a class="exit-off-canvas"></a> <!-- Exit the off canvas navigation -->
+</div>
+</div>
+</body>
+</html>
+

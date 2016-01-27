@@ -1,0 +1,5 @@
+Recommended to run on a server i.e. localhost.
+Create a folder called audiofiles and populate with a track or tracks and change the path names in sm2player.html to use player.
+
+SoundBranch - A dynamic web 2.0 mash up which incorporates music recommendation systems such as the echo nest, deezer and last.fm. all wrapped in responsive web design
+using the Foundation Framework 5 by ZURB.

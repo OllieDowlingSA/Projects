@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Import the files and libraries for use -->
+<link rel="shortcut icon" href="img/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Images</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+<script type="text/javascript" src="js1/get_key_with_callback.js"></script>
+<link rel="stylesheet" href="css/foundation.css" />
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+</head>  
+<style>
+.image-container {
+	width: 240px;
+height: 240px;
+background-size: cover;
+background-image:"http://i.stack.imgur.com/2OrtT.jpg";
+background-repeat: no-repeat;
+background-position: 50% 50%;
+float:left;
+}     
+#share-buttons img {
+	width: 45px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}	
+</style>
+
+<body>
+<div class="off-canvas-wrap" data-offcanvas> <!-- Add the off canvas navigation -->
+<div class="inner-wrap">
+<nav class="tab-bar">
+<section class="left-small">
+<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+
+<section class="middle tab-bar-section">
+<h1 class="title"><a href="blogs.html"><span>SoundBranch</span></a></h1>
+</section>
+
+<section class="right-small">
+<a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+</nav>
+
+<aside class="left-off-canvas-menu"> <!-- Use off canvas wrap left -->
+<ul class="off-canvas-list">
+<li><label>SoundBranch</label></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="trending.html">Trending</a></li> <!-- Add links -->
+<li><a href="blogs.html">Blog search</a></li>
+<li><a href="tracks.html">View top Tracks</a></li>
+<li><a href="albums.html">View top Albums</a></li>
+<li><a href="sm2player.html">Listen</a></li>
+<li><a href="api.html">API</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+</aside>
+
+<aside class="right-off-canvas-menu"> <!-- Use of canvas wrap right -->
+<ul class="off-canvas-list">
+<li><label>Genres</label></li>
+<li><a href="trending.html">Rock</a></li>
+<li><a href="trendingrap.html">Rap</a></li>
+<li><a href="trendingsoul.html">Soul</a></li>
+<li><a href="trendinggospel.html">Gospel</a></li>
+<li><a href="trendingdance.html">Pop</a></li>
+<li><a href="trendingcountry.html">Country</a></li>
+<li><a href="trendingblues.html">Blues</a></li>
+<li><a href="trendingmetal.html">Hard Rock</a></li>
+
+</ul>
+</aside>
+<div class="row">  
+<div class="large-12 columns">
+<div class="panel radius">
+<h2> Artist Images </h2>
+<p>Return Images of any artist from The Echo Nest API.</p>
+<div>
+<input id="artist" type="text" placeholder="Enter artist name ..." </input> <!-- Text holder for search feature -->
+<button id="go" class="small button round"> Get Images </button>
+</div>
+
+<div id="info" class=""> </div>
+<div id="share-buttons"> <!-- Add social media buttons -->
+<div class="row">
+<div class="large-6 columns">
+
+<!-- Facebook -->
+<a href="http://www.facebook.com/sharer.php?u=http://soundbranch.net/" target="_blank"><img src="img/facebook.png" alt="Facebook" /></a>
+
+<!-- Twitter -->
+<a href="http://twitter.com/share?url=http://soundbranch.net/&text=SoundBranch&hashtags=SoundBranch.net" target="_blank"><img src="img/twitter.png" alt="Twitter" /></a>
+
+<!-- Google+ -->
+<a href="https://plus.google.com/share?url=http://soundbranch.net/" target="_blank"><img src="img/google.png" alt="Google" /></a>
+
+<!-- LinkedIn -->
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://soundbranch.net/" target="_blank"><img src="img/linkedin.png" alt="LinkedIn" /></a>
+
+<!-- Pinterest -->
+<a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"><img src="img/pinterest.png" alt="Pinterest" /></a>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="results"> </div>
+
+<script type="text/javascript">
+
+var apiKey = 'NO_API_KEY';
+jQuery.ajaxSettings.traditional = true; 
+
+function fetchImages(artist) {
+	var url = 'http://developer.echonest.com/api/v4/artist/images'; <!-- URL to echo nest API for JSON -->
+
+	var args = {  <!-- Variables to use -->
+			format:'json', 
+			api_key: apiKey,
+			name: artist,
+			results: 100, 
+	}; 
+
+	info("Fetching images for " + artist);
+	$.getJSON(url, args, <!-- Reads in the JSON data -->
+			function(data) {
+		$("#results").empty();
+		if (! ('images' in data.response)) {
+			error("Can't find any images for " + artist); <!-- If the result are null show error message -->
+		} else {
+			$("#results").show();
+			$.each(data.response.images, function(index, item) {
+				var div = formatItem(index, item);
+				$("#results").append(div); <!-- Else show results and display to div -->
+			});
+			info("Showing " + data.response.images.length + " of " + data.response.total + " images for " + artist); <!-- Shows images for specific artist -->
+		}
+	},
+	function() {
+		error("Trouble getting blog posts for " + artist);
+	}
+			);
+}
+
+
+
+function formatItem(which, item) { <!-- Show the attributes (their source ) of the image on hover and hide when not on hover -->
+	var img = $("<div>");
+	img.addClass("image-container span3");
+	img.css("background-image", "url(" +item.url + ")");
+
+	var attribution = $("<span class='label'>")
+			.text(item.license.attribution)
+			.hide();
+
+	img.append(attribution);
+	img.hover( 
+			function(evt) {
+				img.find('.label').show();
+			},
+			function(evt) {
+				img.find('.label').hide();
+			}
+			);
+	return img;
+}
+
+
+function go() { <!-- Find the artist image if not show error to retype search -->
+	var artist = $.trim($("#artist").val());
+	if (artist.length  > 0) {
+		fetchImages(artist);
+	} else {
+		info("Type an artist name first");
+	}
+}
+
+function info(s) {
+	$("#info").removeClass();
+	if (s.length > 0) {
+		$("#info").addClass("alert alert-info");
+	}
+	$("#info").text(s);
+}
+
+function error(s) {
+	$("#info").removeClass();
+	if (s.length > 0) {
+		$("#info").addClass("alert alert-error");
+	}
+	$("#info").text(s);
+}
+
+$(document).ready(function() {
+	
+	
+	fetchApiKey( function(api_key, isLoggedIn) { <!-- Fetches my API key for use -->
+		if (!api_key) {
+			api_key = 'MN1A1GKCIRHD92GZ4';
+		}
+		apiKey = api_key;
+		$("#go").click(go);
+		$("#artist").change(go);
+	});
+});
+</script>
+
+<script>
+$(document).foundation();
+</script>
+
+</div>
+<a class="exit-off-canvas"></a>
+</body>
+</html>

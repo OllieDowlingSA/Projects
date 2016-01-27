@@ -1,0 +1,325 @@
+<html>
+<head>
+<link rel="shortcut icon" href="img/favicon.ico">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title> Music Search </title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> 
+<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
+<link rel="stylesheet" href="css/foundation.css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" /> 
+  <!--  <link rel="stylesheet" href="css/styles.css" />-->
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script> <!-- All imports to be used -->
+
+<style type="text/css">
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+#header {
+margin-top:20px;
+text-align:center;
+width: 100%;
+}
+
+#footer {
+margin-top:30px;
+text-align:center;
+width:100%;
+font-size:10px;
+}
+
+#textfield {      
+text-align:left;
+color: black;
+margin-left:auto;
+margin-right:auto;
+}
+
+.sdiv {
+margin:30px;
+color: #000000;
+}
+
+.timg {
+margin-right: 20px;
+width:120px;
+height:120px;
+box-shadow: 5px 5px 5px #13142d;
+}
+
+.title {
+font-weight: bold;
+color: black;
+margin-bottom: 6px;
+}
+
+#playlist {
+<!--width:500px;
+margin-left:auto;
+margin-right:auto;
+}-->
+}
+
+#info {
+/*width:80%;
+text-align:auto;
+height: 14px;
+margin-left:auto;
+margin-right:auto;
+margin-top:20px;*/
+}
+
+.player {  
+-moz-border-radius: 30px;
+-webkit-border-radius: 30px;
+border-radius: 30px;
+box-shadow: 5px 5px 3px #ccc;
+width: 35%;
+}
+
+#share-buttons img {
+width: 45px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}
+</style>
+</head>
+
+<body>
+<div class="off-canvas-wrap" data-offcanvas> <!-- Off Canvas menu -->
+<div class="inner-wrap">
+<nav class="tab-bar">
+<section class="left-small">
+<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+
+<section class="middle tab-bar-section">
+<h1 class="title"><a href="trending.html"><span>SoundBranch</span></a></h1>
+</section>
+
+<section class="right-small">
+<a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+</nav>
+
+<aside class="left-off-canvas-menu"> <!-- Use off canvas wrap left -->
+<ul class="off-canvas-list">
+<li><label>SoundBranch</label></li>
+<li><a href="trending.html">Trending</a></li>
+<li><a href="images.html">Image search</a></li>
+<li><a href="blogs.html">Blog search</a></li>
+<li><a href="tracks.html">View top Tracks</a></li>
+<li><a href="albums.html">View top Albums</a></li>
+<li><a href="sm2player.html">Listen</a></li>
+<li><a href="api.html">API</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+</aside>
+
+<aside class="right-off-canvas-menu"> <!-- Use of canvas wrap right -->
+<ul class="off-canvas-list">
+<li><label>Genres</label></li>
+<li><a href="trending.html">Rock</a></li>
+<li><a href="trendingrap.html">Rap</a></li>
+<li><a href="trendingsoul.html">Soul</a></li>
+<li><a href="trendinggospel.html">Gospel</a></li>
+<li><a href="trendingdance.html">Pop</a></li>
+<li><a href="trendingcountry.html">Country</a></li>
+<li><a href="trendingblues.html">Blues</a></li>
+<li><a href="trendingmetal.html">Hard Rock</a></li>
+
+</ul>
+</aside>
+
+<center></center>
+
+<div id='header'>
+<h1>Welcome to Your SoundBranch</h1>
+<h3>Powered by The Echo Nest, Deezer + Last.fm</h3>
+<h4>  </h4>
+<!-- <input id='artist-name'  size="20" type='text'> -->
+</div>
+
+<div class="row"> <!-- Row of 12 columns -->
+<div class="large-12 columns">
+<div id='textfield'> <h5>Enter an artist:</h5><input id='artist-name'  size="20" type='text'></div>
+</div>
+</div>
+
+<div class="row">
+<div class="large-12 columns">
+<div class="panel radius">
+<!--<div id="info"></div>-->
+<div id='playlist'>
+<div id='footer'> 
+SoundBranch Powered by The Echo Nest, Deezer and Last.fm. See <a href='about.html'> The SoundBranch.net</a> for more info.
+</div>
+</div>    
+</div>
+</div>
+</div>
+
+<p>
+<div class="row">
+<!-- <div class="large-12 columns"> -->
+<ul class="small-block-grid-4"> <!-- A row of small block grid 4 to resize horizontally -->
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+</ul>
+</div>
+
+<script type="text/javascript">
+
+var API_KEY='MN1A1GKCIRHD92GZ4';<!--Add your API KEY -->
+
+		var audio
+		jQuery.ajaxSettings.traditional = true;
+
+        <!-- Creates the song Div -->
+		function createSongDiv(song) { 
+			var songDiv = $("<div class='sdiv' id=" + song.id + "-div>");
+			return songDiv;
+		}
+        <!-- Add songs to the playlist -->
+		function addSongs(songs) {
+			var playlist = $("#playlist");
+
+			for (var i = 0; i < songs.length; i++) {
+				var div = createSongDiv(songs[i]);
+				playlist.append(div);
+				fetchDeezerTrack(songs[i], div);
+			}
+		}
+         <!-- Get the deezer tracks -->
+		function fetchDeezerTrack(song, div) {
+			if (song.tracks.length > 0) {
+				var tid = song.tracks[0].foreign_id.split(':')[2];
+				var url = 'http://api.deezer.com/2.0/track/' + tid + '?callback=?'
+                        <!-- Get the JSON and render to HTML-->
+						jQuery.getJSON(url, { output:'jsonp'},
+								function(data) {
+							var link = $("<a target='deezer'>").attr('href', link='sm2player.html');
+							var cover = $("<img class='timg'>").attr('src', data.album.cover).attr("style", "float:left");
+							link.append(cover);
+							div.append(link);
+
+							var tdiv = $("<div class='tdiv'>");
+							tdiv.append( $("<div class='title'>").text(data.title));
+							tdiv.append( $("<div>").text(data.album.title));
+							tdiv.append( $("<div>").text(data.artist.name));
+							div.append(tdiv);
+							div.append(createPlayer(data.preview));
+							div.append($('<br clear="left">'));
+						}
+								);
+			}
+		}
+        <!-- Create the play button -->
+		function createPlayButton(audio) {
+			var button = $("<button>").text("preview");
+			button.click( 
+					function()  {
+						alert("Playing " + audio);
+					}
+					);
+			return button;
+		}
+        <!-- Create the HTML 5 audio player -->
+		
+		function createPlayer(audio) {
+		   
+			var player = $("<audio class='player' preload='none' controls='controls'>").attr("src", audio);
+			return player;
+		}
+
+
+		function info(msg) {
+			$("#info").text(msg);
+		}
+        <!-- Get the playlist for the artists-->
+		function fetchPlaylist(artist) {
+			info("Getting playlist for " + artist);
+			$("#playlist").empty();
+			var url = 'http://developer.echonest.com/api/v4/playlist/static?callback=?'
+
+                    <!-- Get the JSON data using jQuery-->
+					jQuery.getJSON(url, 
+							{   artist:artist, 
+						type:'artist-radio', 
+						format:'jsonp', 
+						bucket: ['id:deezer', 'tracks'],
+						limit: true,
+						'api_key' : API_KEY
+							},
+							function(data) {
+								info("");
+								if (data.response.status.code == 0) {
+									var songs = data.response.songs;
+									addSongs(songs); <!-- Add the songs if successful -->
+								} else {
+									info("Can't create a playlist for " + artist);<!--Return error message -->
+								}
+							}
+							);
+		}
+
+		function initUI() { <!-- Return the data on key press return -->
+			$("#artist-name").keypress(
+					function(e) {
+						if(e.which == 13) {
+							var artist = $("#artist-name").val();
+							fetchPlaylist(artist);
+						}
+					}
+					);
+		} 
+
+
+		$(document).ready(
+				function() {
+					initUI();<!-- Initialize -->
+				}
+				); 
+
+		</script>
+		</script>
+		<div id="share-buttons"> <!-- Buttons to be used for social media -->
+		<div class="row">
+		<div class="large-5 columns"> <!-- Buttons will stack -->
+
+
+		<!-- Facebook -->
+		<a href="http://www.facebook.com/sharer.php?u=http://soundbranch.net/" target="_blank"><img src="img/facebook.png" alt="Facebook" /></a>
+
+		<!-- Twitter -->
+		<a href="http://twitter.com/share?url=http://soundbranch.net/&text=SoundBranch&hashtags=SoundBranch.net" target="_blank"><img src="img/twitter.png" alt="Twitter" /></a>
+
+		<!-- Google+ -->
+		<a href="https://plus.google.com/share?url=http://soundbranch.net/" target="_blank"><img src="img/google.png" alt="Google" /></a>
+
+		<!-- LinkedIn -->
+		<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://soundbranch.net/" target="_blank"><img src="img/linkedin.png" alt="LinkedIn" /></a>
+
+		<!-- Pinterest -->
+		<a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"><img src="img/pinterest.png" alt="Pinterest" /></a>
+		</div>
+		</div>
+		</div>
+
+
+		<script>
+		$(document).foundation();
+		</script>
+
+		<a class="exit-off-canvas"></a>
+		</div>
+		</div>
+
+		</body>
+		</html>

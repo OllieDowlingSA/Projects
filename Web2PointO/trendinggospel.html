@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="shortcut icon" href="img/favicon.ico">
+<style type="text/css">
+
+#share-buttons img {
+	width: 45px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}
+
+</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Artist Info</title>
+<link href="css/main.css" rel="stylesheet" type="text/css" /> 
+<link rel="stylesheet" href="css/foundation.css" />
+
+
+<!-- load jquery and jsrender libraries -->
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jsrender.js"></script>
+
+<!-- and new libraries to use lastfm -->
+<script type="text/javascript" src="js/lastfm.api.md5.js"></script>
+<script type="text/javascript" src="js/lastfm.api.js"></script>
+<script type="text/javascript" src="js/lastfm.api.cache.js"></script>
+
+<!-- define three templates for our units -->
+<script id="lastfmTemplateArtists" type="text/x-jsrender">
+<div id="{{:mbid}}" class="artist"> <!-- return the name and images for the artist for top trending by tag mbid,name image -->
+<a href="index.html" rel="nofollow" target="_blank"><img src="{{:image[2]["#text"]}}" alt="{{:name}}" /><b>{{:name}}</b></a>
+</div>
+</script>
+
+<script id="lastfmTemplateArtistInfo" type="text/x-jsrender"> <!-- script for artist info -->
+<div class="artist_info">
+<a href="index.html" rel="nofollow" target="_blank"><b>{{:name}}</b><img src="{{:image[4]["#text"]}}" alt="{{:name}}" /></a> <!-- link to blogs.html and return image 2 by tag from last fm -->
+<div class="row"> <!-- Add panel and row for results of top artist identified by id top_artist -->
+<p>
+<div class="callout panel radius">
+<ul class="small-block-grid-4">
+<ul><h5>Formed in - {{:bio.yearformed}}</h5></ul> <!-- return the year the artists formed by tag bio -->
+<ul><h5>Playcount - {{:stats.playcount}}</h5></ul> <!-- return the playcounts for that artist by tag stats -->
+<ul><h5>Current tours - {{:ontour}}</h5></ul> <!-- return the current tours for that artist  by tag stats for ontour --> 
+<ul><h5>Streamable - {{:streamable}}</h5></ul> <!-- return the current tours streamable by that artist by tag stats -->
+</div>
+</div>
+</p>
+</script>
+
+
+<script id="lastfmTemplateTracks" type="text/x-jsrender">
+{{if image}}
+<div id="{{:mbid}}" class="track"> <!-- return the tracks for an artist and display their image, name and link to index.html -->
+<a href="index.html" rel="nofollow" target="_blank"><img src="{{:image[0]["#text"]}}" /><b>{{:name}}</b></a> 
+</div>
+{{/if}}
+</script>
+<script type="text/javascript" src="js/maingospel.js"></script>
+</head>
+<body>
+<nav class="top-bar">
+<center><ul class="title-area">
+<li class="name"><h1><a href="index.html">SoundBranch</a></h1></li>            
+</ul></center>
+
+<ul class="title-area right">
+<li class="name"><h1><a href="about.html">About</a></h1></li>  
+</ul>
+</nav>
+     
+<div class="row"> 
+<div class="large-12 columns">
+    <a href="sm2player.html" class="button secondary tiny right">Listen</a>
+    <a href="albums.html" class="button secondary tiny right">Albums</a>
+    <a href="tracks.html" class="button secondary tiny right">Tracks</a>	
+    <a href="blogs.html" class="button secondary tiny right">Blogs</a>
+    <a href="images.html" class="button secondary tiny right">Images</a>
+    <a href="trendingblues.html" class="button secondary tiny right">Blues</a>
+	<a href="trendingcountry.html" class="button secondary tiny left">Country</a>
+    <a href="trendingdance.html" class="button secondary tiny left">Pop</a>
+	<a href="trending.html" class="button secondary tiny left">Rock</a>
+    <a href="trendingmetal.html" class="button secondary tiny left">Hard Rock</a>
+	<a href="trendingrap.html" class="button secondary tiny left">Rap</a>
+	<a href="trendingsoul.html" class="button secondary tiny left">Soul</a>
+</div>
+</div>
+
+<div class="row">   <!-- Add panel and row for results of top artists identified by id top_artists -->
+<div class="large-12 columns">
+<div class="panel">
+<div class="content-body">
+<a href="images.html"><h3>Top gospel artists trending</h3></a>
+<div class="content-body-inner" id="top_artists"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row"> <!-- Add panel and row for results of top artist identified by id top_artist -->
+<div class="large-8 columns">
+<div class="panel">
+<div class="content-body"> 
+<a href="blogs.html"><h3>No.1 Top artist</h3></a>
+<div class="content-body-inner" id="top_artist"></div>
+<!--  <h5>Current Tour</h5> -->
+</div>
+</div>
+</div>
+
+<div class="large-4 columns">
+<img src="img/tree12.png" alt="smile" id="imgSmile">
+</div>
+<script>
+$(document).ready(function(){ <!-- Script to animate image to 500px and back to 250px slowly -->
+	$('#imgSmile').width(250);
+	$('#imgSmile').mouseover(function()
+			{
+		$(this).css("cursor","pointer");
+		$(this).animate({width: "500px"}, 'slow');
+			});
+
+	$('#imgSmile').mouseout(function()
+			{   
+		$(this).animate({width: "250px"}, 'slow');
+			});
+});
+</script>
+
+<div class="row"> <!-- Add panel and row for results of top tracks identified by id top_tracks -->
+<div class="large-12 columns">
+<div class="panel">
+<div class="content-body">
+<a href="index.html"><h3>Top tracks</h3></a>
+<div class="content-body-inner" id="top_tracks"></div>
+</div>
+</div>
+</div>
+</div>	
+
+<div id="share-buttons"> <!-- Add social media buttons -->
+<div class="row">
+<div class="large-5 columns">
+<!-- Facebook -->
+<a href="http://www.facebook.com/sharer.php?u=http://soundbranch.net/" target="_blank"><img src="img/facebook.png" alt="Facebook" /></a>
+
+<!-- Twitter -->
+<a href="http://twitter.com/share?url=http://soundbranch.net/&text=SoundBranch&hashtags=SoundBranch.net" target="_blank"><img src="img/twitter.png" alt="Twitter" /></a>
+
+<!-- Google+ -->
+<a href="https://plus.google.com/share?url=http://soundbranch.net/" target="_blank"><img src="img/google.png" alt="Google" /></a>
+
+<!-- LinkedIn -->
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://soundbranch.net/" target="_blank"><img src="img/linkedin.png" alt="LinkedIn" /></a>
+
+<!-- Pinterest -->
+<a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"><img src="img/pinterest.png" alt="Pinterest" /></a>
+
+</div>
+</div>
+</div>
+</body>
+</html>

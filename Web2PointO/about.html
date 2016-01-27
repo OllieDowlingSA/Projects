@@ -1,0 +1,254 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<link rel="shortcut icon" href="img/favicon.ico">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Welcome to SoundBranch</title>
+<link rel="stylesheet" href="css/foundation.css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" /> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><!-- Import Library -->
+
+<script src="js/vendor/modernizr.js">
+</script>
+
+<style type="text/css"> <!-- Extra css styles -->
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+#header {
+	margin-top:20px;
+text-align:center;
+width: 100%;
+}
+
+#footer {
+	margin-top:30px;
+text-align:center;
+width:100%;
+font-size:10px;
+}
+
+.sdiv {
+	margin:30px;
+}
+
+.timg {
+	margin-right: 20px;
+width:120px;
+height:120px;
+}
+
+.title {
+	font-weight: bold;
+color: green;
+margin-bottom: 6px;
+}
+
+#playlist {
+	width:500px;
+margin-left:auto;
+margin-right:auto;
+}
+
+#info {
+	width:80%;
+text-align:center;
+height: 14px;
+margin-left:auto;
+margin-right:auto;
+margin-top:20px;
+}
+
+.player {
+	margin-top:20px;
+}
+#share-buttons img {
+	width: 45px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}	
+</style>
+
+</head>
+<body>
+<div class="off-canvas-wrap" data-offcanvas> <!-- Off canvas menu -->
+<div class="inner-wrap">
+<nav class="tab-bar">
+<section class="left-small">
+<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+
+<section class="middle tab-bar-section">
+<h1 class="title"><a href="index.html"><span>SoundBranch</span></a></h1>
+</section>
+
+<section class="right-small">
+<a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+</nav>
+
+<aside class="left-off-canvas-menu"> <!-- Use off canvas wrap left -->
+<ul class="off-canvas-list">
+<li><label>SoundBranch</label></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="trending.html">Trending</a></li>
+<li><a href="images.html">Image search</a></li>
+<li><a href="blogs.html">Blog search</a></li>
+<li><a href="tracks.html">View top Tracks</a></li>
+<li><a href="albums.html">View top Albums</a></li>
+<li><a href="sm2player.html">Listen</a></li>
+<li><a href="portfolio.html">My Portfolio</a></li>
+<li><a href="api.html">API</a></li>
+</ul>
+</aside>
+
+<aside class="right-off-canvas-menu"> <!-- Use of canvas wrap right -->
+<ul class="off-canvas-list">
+<li><label>Genres</label></li>
+<li><a href="trending.html">Rock</a></li>
+<li><a href="trendingrap.html">Rap</a></li>
+<li><a href="trendingsoul.html">Soul</a></li>
+<li><a href="trendinggospel.html">Pop</a></li>
+<li><a href="trendingdance.html">Dance</a></li>
+<li><a href="trendingcountry.html">Country</a></li>
+<li><a href="trendingblues.html">Blues</a></li>
+<li><a href="trendingmetal.html">Hard Rock</a></li>
+
+</ul>
+</aside>
+
+<section class="main-section">
+<!-- content goes here -->
+<div class="row">  
+<div class="large-8 columns">
+<div class="panel"> <!-- Panel for Content using 8 columns -->
+<h1> Welcome to SoundBranch</h1>
+
+<p>The rest of the field has gotten pretty far since then and we’ve now got tons of ways to discover 
+music using actual qualities of the music or social cues of what your friends are listening to. But 
+I still hate seeing examples like the above. I hate thinking there are forces at work in music 
+discovery that don’t have listeners’ best interests at heart and I want to make them better. 
+I want to walk through all the ways music recommenders work or don’t, and concentrate of course on 
+the one I know best – The Echo Nest’s – which you’re probably using even if you don’t already know it. 
+And most importantly, I want to talk about what we can do next.
+</p>
+<!-- Triggers the modals -->
+<a href="#" data-reveal-id="firstModal" class="small button round">Branch Out&hellip;</a>
+<!-- Reveal Modals begin -->
+<div id="firstModal" class="reveal-modal" data-reveal>
+<h2>SoundBranch for Developers and Music Enthusiasts.</h2>
+<h3>Which are you?</h3>
+
+<div class="row">
+<div class="large-12 columns">
+<h3></h3>
+<ul class="large-block-grid-4"> <!-- Use 12 columns with block grid 4 so images will stack -->
+<li><img src="img/disk4_1.png" /></li>
+<li><img src="img/disk3.png" /></li>
+<li><img src="img/crowds.jpg" /></li>
+<li><img src="img/disks.png" /></li>
+</div>
+</div>
+
+<p></p>
+<a class="close-reveal-modal">&#215;</a>
+</div>
+</div>
+</div>
+
+<div class="large-4 columns">
+<img src="img/tree12.png" alt="smile" id="imgSmile">
+</div>
+</div>
+<script>
+$(document).ready(function(){ <!-- Script to animate the image out to 500px and back to 250px slowly -->
+	$('#imgSmile').width(250);
+	$('#imgSmile').mouseover(function()
+			{
+		$(this).css("cursor","pointer");
+		$(this).animate({width: "500px"}, 'slow');
+			});
+
+	$('#imgSmile').mouseout(function()
+			{   
+		$(this).animate({width: "250px"}, 'slow');
+			});
+});
+</script>
+
+<hr/>
+<div class="row">
+<div class="large-12 columns">
+<h3>What is SoundBranch</h3>
+<p>Musicians are competing for an audience among millions of others trying 
+just as hard. And it’s not the listener’s fault if they miss out on something 
+that will change their lives – these days, anyone can gain access to a library 
+of over 15 million songs on demand for free. To a musician turned computer scientist 
+(as I and so many of my colleagues are) this is the ultimate hidden variable problem. 
+If there was something “intelligent” that could predict a song or artist to a person,
+both sides (musician and listener) win, music is amazing, there’s a ton of data, 
+and it’s very far from solved.
+<!-- <p> <audio controls> 
+<source src="myAudio.ogg" type="audio/ogg">
+<source src="C:\Users\Ollie\Desktop\R.mp3" type="audio/mp3">
+</audio> -->
+</p>
+</div>
+</div>
+
+<div class="row">
+<!-- <div class="large-12 columns"> -->
+<h3></h3>
+<ul class="small-block-grid-4">
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+</ul>
+</div>
+
+<div id="share-buttons"> <!-- Buttons for socila media -->
+<div class="row">
+<div class="large-6 columns">
+
+<!-- Facebook -->
+<a href="http://www.facebook.com/sharer.php?u=http://soundbranch.net/" target="_blank"><img src="img/facebook.png" alt="Facebook" /></a>
+
+<!-- Twitter -->
+<a href="http://twitter.com/share?url=http://soundbranch.net/&text=SoundBranch&hashtags=SoundBranch.net" target="_blank"><img src="img/twitter.png" alt="Twitter" /></a>
+
+<!-- Google+ -->
+<a href="https://plus.google.com/share?url=http://soundbranch.net/" target="_blank"><img src="img/google.png" alt="Google" /></a>
+
+<!-- LinkedIn -->
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://soundbranch.net/" target="_blank"><img src="img/linkedin.png" alt="LinkedIn" /></a>
+
+<!-- Pinterest -->
+<a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"><img src="img/pinterest.png" alt="Pinterest" /></a>
+
+</div>
+</div>
+</div>
+
+<script>
+
+document.write('<script src=' +
+		('_proto_' in{} ? 'js/vendor/zepto' : 'js/vendor/jquery')+
+		'.js><\/script>')
+		</script>        
+
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+$(document).foundation();
+</script>
+</section>
+
+<a class="exit-off-canvas"></a>
+</div>
+</div>
+</body>
+</html>

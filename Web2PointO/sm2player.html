@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<head>
+<!-- Imports to be used -->
+<link rel="shortcut icon" href="img/favicon.ico">
+<meta charset="UTF-8" />
+<title>SoundManager2 Player</title>
+<link rel="stylesheet" href="css/foundation.css" />
+<meta name="robots" content="noindex" />
+<meta name="viewport" content="width=500, initial-scale=1">
+<script type="text/javascript" src="script/soundmanager2.js"></script>
+<script src="script/bar-ui.js"></script>
+<script src="js/server1.js"></script>
+<link rel="stylesheet" href="css/bar-ui.css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" /> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="script/demo.js"></script>
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+</head>
+
+<body>
+<div class="off-canvas-wrap" data-offcanvas> <!-- Off canvas menu -->
+<div class="inner-wrap">
+<nav class="tab-bar">
+<section class="left-small">
+<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+
+<section class="middle tab-bar-section">
+<h1 class="title"><a href="index.html"><span>SoundBranch</span></a></h1>
+</section>
+
+<section class="right-small">
+<a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+</nav>
+
+<aside class="left-off-canvas-menu"> <!-- Use off canvas wrap left -->
+<ul class="off-canvas-list">
+<li><label>SoundBranch</label></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="trending.html">Trending</a></li> <!-- Set links -->
+<li><a href="images.html">Image search</a></li>
+<li><a href="blogs.html">Blog search</a></li>
+<li><a href="tracks.html">View top Tracks</a></li>
+<li><a href="albums.html">View top Albums</a></li>
+<li><a href="api.html">API</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+</aside>
+
+<aside class="right-off-canvas-menu"> <!-- Use of canvas wrap right -->
+<ul class="off-canvas-list">
+<li><label>Genres</label></li>
+<li><a href="trending.html">Rock</a></li> <!-- Set links -->
+<li><a href="trendingrap.html">Hip Hop</a></li>
+<li><a href="trendingsoul.html">Soul</a></li>
+<li><a href="trendinggospel.html">Gospel</a></li>
+<li><a href="trendingdance.html">Dance</a></li>
+<li><a href="trendingcountry.html">Country</a></li>
+<li><a href="trendingblues.html">Blues</a></li>
+<li><a href="trendingmetal.html">Hard Rock</a></li>
+
+</ul>
+</aside>
+
+<div class="row">  
+<!-- <div class="large-12 columns"> -->
+<!--<div class="panel"> turns text colour to black, only suitable for light blue player -->
+<h1><center>The SoundBranch Player</center></h1>
+<div class="row">
+<!-- <div class="large-12 columns"> -->
+<ul class="small-block-grid-4"> <!-- Small block grid to resize images and keep them horizontal -->
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+</ul>
+</div>
+
+<!-- <h3><center></center></h3> -->
+<hr>
+
+<div class="demo-wrapper">
+
+<div class="demo-left">
+
+<div class="demo-bd">
+
+
+<!-- player #2 -->
+<h3></h3>
+<div class="sm2-bar-ui textured"> <!-- bar UI to be used and styles and buttons set -->
+<div class="bd sm2-main-controls">
+<div class="sm2-inline-texture"></div>
+<div class="sm2-inline-gradient"></div>
+<div class="sm2-inline-element sm2-button-element">
+<div class="sm2-button-bd">
+<a href="#play" class="sm2-inline-button play-pause">Play / pause</a>
+</div>
+</div>
+
+<div class="sm2-inline-element sm2-inline-status">
+
+<div class="sm2-playlist">
+<div class="sm2-playlist-target">
+<!-- playlist <ul> + <li> markup will be injected here -->
+<!-- if you want default / non-JS content, you can put that here. -->
+<!-- <noscript><p>JavaScript is required.</p></noscript> -->
+</div>
+</div>
+
+<div class="sm2-progress">
+<div class="sm2-row">
+<div class="sm2-inline-time">0:00</div> <!-- Start time -->
+<div class="sm2-progress-bd">
+<div class="sm2-progress-track">
+<div class="sm2-progress-bar"></div>
+<div class="sm2-progress-ball"><div class="icon-overlay"></div></div>
+</div>
+</div>
+<div class="sm2-inline-duration">0:00</div> <!-- End time -->
+</div>
+</div>
+</div>
+
+<div class="sm2-inline-element sm2-button-element sm2-volume"> <!-- Volume controls -->
+<div class="sm2-button-bd">
+<span class="sm2-inline-button sm2-volume-control volume-shade"></span>
+<a href="#volume" class="sm2-inline-button sm2-volume-control">volume</a>
+</div>
+</div>
+
+<div class="sm2-inline-element sm2-button-element"> <!-- Previous button -->
+<div class="sm2-button-bd">
+<a href="#prev" title="Previous" class="sm2-inline-button previous">&lt; previous</a>
+</div>
+</div>
+
+<div class="sm2-inline-element sm2-button-element"> <!-- Skip next Button -->
+<div class="sm2-button-bd">
+<a href="#next" title="Next" class="sm2-inline-button next">&gt; next</a>
+</div>
+</div>
+
+<div class="sm2-inline-element sm2-button-element sm2-menu"> <!-- Set your menu button -->
+<div class="sm2-button-bd">
+<a href="#menu" class="sm2-inline-button menu">menu</a>
+</div>
+</div>
+</div>
+
+<div class="bd sm2-playlist-drawer sm2-element">
+<div class="sm2-inline-texture">
+<div class="sm2-box-shadow"></div> <!-- Texture with a shadow for dropdown menu -->
+</div>
+
+
+<!-- playlist content is mirrored here -->
+
+<div class="sm2-playlist-wrapper"> <!-- Add your playlist here -->
+<ul class="sm2-playlist-bd">
+<li><a href="audiofiles/HotelCalifornia.wav"><b>The Eagles</b> - Hotel California <span class="label">Soft Rock</span></a></li>
+<li><a href="audiofiles/LyinEyes.wav"><b>The Eagles</b> - Lyin' Eyes <span class="label">Soft Rock</span></a></li>
+<li><a href="audiofiles/FreeFalin.mp3"><b>Tom Petty</b> - Free Fallin' <span class="label">Rock</span></a></li>
+<li><a href="audiofiles/Default.mp3"><b>Atoms for Peace</b> - Default <span class="label">Electro</span></a></li>
+<li><a href="audiofiles/control.mp3"><b>Joy Division</b> - She's Lost Control <span class="label">Punk Rock</span></a></li>
+<li><a href="audiofiles/Amok.mp3"><b>Atoms for Peace</b> - Amok <span class="label">Electro</span></a></li>
+<li><a href="audiofiles/boyfriend.mp3"><b>The Ramones</b> - I Wanna be your Boyfriend <span class="label">Punk Rock</span></a></li>
+<li><a href="audiofiles/brat.mp3"><b>The Ramones</b> - Beat on the Brat<span class="label">Punk Rock</span></a></li>
+<li><a href="audiofiles/beach.mp3"><b>The Ramones</b> - Rockaway Beach<span class="label">Punk Rock</span></a></li>
+<li><a href="audiofiles/judyisapunk.mp3"><b>The Ramones</b> - Judy is a Punk <span class="label">Punk Rock</span></a></li>
+<li><a href="audiofiles/TheStroke.mp3"><b>Billy Squire</b> - The Stroke<span class="label">Rock</span></a></li>
+<li><a href="audiofiles/snacks.mp3"><b>Fun Lovin Criminals</b> - Scooby Snacks<span class="label">Funky</span></a></li>
+<li><a href="audiofiles/shangrila.mp3"><b>Mother Love Bone</b> - This is Shangrila <span class="label">Grunge</span></a></li>
+</ul>
+</div>
+
+<div class="sm2-extra-controls">
+<div class="bd">
+<div class="sm2-inline-element sm2-button-element">
+<a href="#prev" title="Previous" class="sm2-inline-button previous">&lt; previous</a>
+</div>
+
+<div class="sm2-inline-element sm2-button-element">
+<a href="#next" title="Next" class="sm2-inline-button next">&gt; next</a>
+</div>
+</div>
+
+<script>
+$(document).foundation();
+</script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--Import scripts to use -->
+<link rel="shortcut icon" href="img/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blogs</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+<script type="text/javascript" src="js1/get_key_with_callback.js"></script>
+<link rel="stylesheet" href="css/foundation.css" />
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+</head>
+  
+<style>
+#share-buttons img { 
+	width: 45px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}	
+</style>
+
+<body>
+<div class="off-canvas-wrap" data-offcanvas> <!-- Off canvas menu -->
+<div class="inner-wrap">
+<nav class="tab-bar">
+<section class="left-small">
+<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+
+<section class="middle tab-bar-section"> <!-- Mid bar section -->
+<h1 class="title"><a href="trending.html"><span>SoundBranch</span></a></h1>
+</section>
+
+<section class="right-small">
+<a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+</nav>
+
+<aside class="left-off-canvas-menu"> <!-- Use off canvas wrap left -->
+<ul class="off-canvas-list">
+<li><label>SoundBranch</label></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="trending.html">Trending</a></li> <!-- Set links -->
+<li><a href="images.html">Image search</a></li>
+<li><a href="tracks.html">View top Tracks</a></li>
+<li><a href="albums.html">View top Albums</a></li>
+<li><a href="sm2player.html">Listen</a></li>
+<li><a href="api.html">API</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+</aside>
+
+<aside class="right-off-canvas-menu"> <!-- Use of canvas wrap right -->
+<ul class="off-canvas-list">
+<li><label>Genres</label></li>
+<li><a href="trending.html">Rock</a></li> <!-- Set links -->
+<li><a href="trendingrap.html">Rap</a></li>
+<li><a href="trendingsoul.html">Soul</a></li>
+<li><a href="trendinggospel.html">Gospel</a></li>
+<li><a href="trendingdance.html">Pop</a></li>
+<li><a href="trendingcountry.html">Country</a></li>
+<li><a href="trendingblues.html">Blues</a></li>
+<li><a href="trendingmetal.html">Hard Rock</a></li>
+
+</ul>
+</aside>
+<div class="row">  
+<div class="large-12 columns">
+<div class="panel radius">
+<h2> Artist Blogs </h2>
+<p>Search Blogs from any artist returns info from The Echo Nest API.</p>
+<div>
+<input id="artist" type="text" placeholder="Enter artist name ..." </input>
+<button id="go" class="small button round"> Get Blog Posts </button>
+</div>
+
+<div id="info" class=""> </div>
+<div id="share-buttons">
+<div class="row">
+<div class="large-6 columns">
+
+<!-- Facebook -->
+<a href="http://www.facebook.com/sharer.php?u=http://soundbranch.net/" target="_blank"><img src="img/facebook.png" alt="Facebook" /></a>
+
+<!-- Twitter -->
+<a href="http://twitter.com/share?url=http://soundbranch.net/&text=SoundBranch&hashtags=SoundBranch.net" target="_blank"><img src="img/twitter.png" alt="Twitter" /></a>
+
+<!-- Google+ -->
+<a href="https://plus.google.com/share?url=http://soundbranch.net/" target="_blank"><img src="img/google.png" alt="Google" /></a>
+
+<!-- LinkedIn -->
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://soundbranch.net/" target="_blank"><img src="img/linkedin.png" alt="LinkedIn" /></a>
+
+<!-- Pinterest -->
+<a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"><img src="img/pinterest.png" alt="Pinterest" /></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row"> 
+<div class="large-12 columns"> 
+<div class="panel callout radius">
+<div id="results"> </div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+var apiKey = 'NO_API_KEY';
+jQuery.ajaxSettings.traditional = true; 
+
+function fetchBlogs(artist, highRelevance) {
+	var url = 'http://developer.echonest.com/api/v4/artist/blogs'; <!-- Url for the echo nest api artist blogs -->
+
+	$("#results").hide();
+	var args = { 
+			format:'json', 
+			api_key: apiKey,
+			name: artist,
+			results: 50, 
+			high_relevance: highRelevance, <!-- first 50 of high relevance are returned -->
+	}; 
+
+	info("Fetching posts for " + artist); <!-- Display message -->
+	$.getJSON(url, args,
+			function(data) {
+		console.log(data); <!--Log Data -->
+		$("#results").empty();
+		if (! ('blogs' in data.response)) {
+			error("Can't find any posts for " + artist); <!-- error response -->
+		} else {
+			$("#results").show();
+			var titles = {}
+			$.each(data.response.blogs, function(index, item) { <!-- show the results -->
+				if (! (item.name in titles)) {
+					var div = formatItem(item);
+					$("#results").append(div);
+					titles[item.name] = 1;
+				}
+			});
+			info("Showing " + data.response.blogs.length + " of " + data.response.total + " blog posts for " + artist); <!--show total blogs by artist -->
+		}
+	},
+	function() {
+		error("Trouble getting blog posts for " + artist);
+	}
+			);
+}
+
+function formatItem(item) { <!-- Append the results to HTML -->
+	var div = $("<div class='news well'>");
+	div.append($("<h4>").html(item.name));
+
+	var date = "";
+	if ('date_posted' in item) {
+		date = "<i>" + item.date_posted.substring(0,10) + '</i> '; <!-- Dates they were posted -->
+	}
+
+	div.append($("<p>").html(date + item.summary + " ..." ));
+	var link = $("<a>");
+	link.attr('href', item.url);
+	link.text("full post on " + getSource(item.url)); <!-- Link to where the original posts are -->
+	div.append(link);
+	return div;
+}
+
+function go() {
+	var artist = $.trim($("#artist").val());
+	if (artist.length  > 0) {
+		var relevance = $("#relevant").is(':checked');
+		fetchBlogs(artist, relevance);
+	} else {
+		info("Type an artist name first");
+	}
+}
+
+function getSource(url) { <!-- Get the source url -->
+	var path = url.split('/');
+	return path[2]	;
+}
+
+function info(s) {
+	$("#info").removeClass();
+	if (s.length > 0) {
+		$("#info").addClass("alert alert-info");
+	}
+	$("#info").text(s);
+}
+
+function error(s) {
+	$("#info").removeClass();
+	if (s.length > 0) {
+		$("#info").addClass("alert alert-error");
+	}
+	$("#info").text(s);
+}
+
+$(document).ready(function() { <!-- Fetch my API key for use and validation -->
+	fetchApiKey( function(api_key, isLoggedIn) {
+		if (!api_key) {
+			api_key = 'MN1A1GKCIRHD92GZ4';
+		}
+		apiKey = api_key;
+		$("#all_results").hide();
+		$("#go").click(go);
+		$("#artist").change(go);
+	});
+});
+</script>
+</div>
+
+<script>
+$(document).foundation();
+</script>
+
+<a class="exit-off-canvas"></a>
+</body>
+</html>

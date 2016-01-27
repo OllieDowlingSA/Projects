@@ -1,0 +1,332 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<!-- All imports -->
+<link rel="shortcut icon" href="img/favicon.ico">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SoundBranch API</title>
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation/foundation.js"></script>
+<script src="js/foundation/foundation.joyride.js"></script>
+<script src="js/vendor/jquery.cookie.js"></script> 
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation/foundation.reveal.js"></script>
+<link rel="stylesheet" href="css/foundation.css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" /> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><!-- Import Library -->
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/vendor/modernizr.js">
+</script>
+
+<style type="text/css"> <!-- Extra css styles -->
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+#header {
+	margin-top:20px;
+text-align:center;
+width: 100%;
+}
+
+#footer {
+	margin-top:30px;
+text-align:center;
+width:100%;
+font-size:10px;
+}
+
+.sdiv {
+	margin:30px;
+}
+
+.timg {
+	margin-right: 20px;
+width:120px;
+height:120px;
+}
+
+.title {
+	font-weight: bold;
+color: green;
+margin-bottom: 6px;
+}
+
+#playlist {
+	width:500px;
+margin-left:auto;
+margin-right:auto;
+}
+
+#info {
+	width:80%;
+text-align:center;
+height: 14px;
+margin-left:auto;
+margin-right:auto;
+margin-top:20px;
+}
+
+.player {
+	margin-top:20px;
+}
+#share-buttons img {
+	width: 45px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}	
+</style>
+</head>
+
+<body>
+<div class="off-canvas-wrap" data-offcanvas> <!-- Off canvas menu -->
+<div class="inner-wrap">
+<nav class="tab-bar">
+<section class="left-small">
+<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+
+<section class="middle tab-bar-section"> <!-- Mid bar section -->
+<h1 class="title"><span>SoundBranch API</span></a></h1>
+</section>
+
+<section class="right-small">
+<a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+</section>
+</nav>
+
+<aside class="left-off-canvas-menu"> <!-- Use off canvas wrap left -->
+<ul class="off-canvas-list">
+<li><label>SoundBranch</label></li> 
+<li><a href="index.html">Home</a></li>
+<li><a href="trending.html">Trending</a></li> <!-- Add links -->
+<li><a href="images.html">Image search</a></li>
+<li><a href="blogs.html">Blog search</a></li>
+<li><a href="tracks.html">View top Tracks</a></li>
+<li><a href="albums.html">View top Albums</a></li>
+<li><a href="sm2player.html">Listen</a></li>
+<li><a href="about.html">About</a></li>
+</ul>
+</aside>
+
+<aside class="right-off-canvas-menu"> <!-- Use of canvas wrap right -->
+<ul class="off-canvas-list">
+<li><label>Docs Navigation</label></li>
+<li><a href="blogtest.html">Get Blogs Method</a></li> <!-- Add links -->
+<li><a href="getinfo.html">Get Info Method</a></li>
+<li><a href="deezerplay.html">Playlist Demo Method</a></li>
+<li><a href="gettopalbums.html">Get Top Albums Method</a></li>
+<li><a href="gettoptracks.html">Get Top Tracks Method</a></li>
+</ul>
+</aside>
+<section class="main-section">
+<!-- content goes here -->
+
+<div class="row">  
+<div class="large-8 columns">
+<div class="panel callout radius"> <!-- rounded panel blue -->
+<h1>Sample Java and jQuery Methods</h1>
+<p>
+The SoundBranch sample API is a service that was designed for easy exploration and use.  
+It is for developers who want to get started using API's with a simple approach to methods and JSON DATA 
+and sample code with explanations.</p>
+
+<!-- Triggers the modals -->
+<a href="#" data-reveal-id="firstModal" class="small button round">JSON&hellip;</a> <!-- Pop up model -->
+<!-- Reveal Modals begin -->
+<div id="firstModal" class="reveal-modal" data-reveal>
+<h2>SoundBranch Documentation.</h2>
+<h3>SoundBranch for Developers and Music Enthusiasts.</h3>
+<h3>Which are you?</h3>
+<h4>Search The SoundBranch API for JSON Data, jQuery and test methods.</h4>
+
+<div class="row">
+<div class="large-12 columns">
+<h3></h3>
+<ul class="small-block-grid-4"> <!-- Images will resize and stay horizontal -->
+<li><img src="img/disk4_1.png" /></li>
+<li><img src="img/disk3.png" /></li>
+<li><img src="img/crowds.jpg" /></li>
+<li><img src="img/disks.png" /></li>
+</div>
+</div>
+<a class="close-reveal-modal">&#215;</a> <!-- Close the reveal Model -->
+</div>
+</div>
+</div>
+
+<div class="large-4 columns">
+<img src="img/tree12.png" alt="smile" id="imgSmile">
+</div>
+</div>
+<script>
+$(document).ready(function(){ <!-- Script to animate the image to 500px back to 250px slowly -->
+	$('#imgSmile').width(250);
+	$('#imgSmile').mouseover(function()
+			{
+		$(this).css("cursor","pointer");
+		$(this).animate({width: "500px"}, 'slow');
+			});
+
+	$('#imgSmile').mouseout(function()
+			{   
+		$(this).animate({width: "250px"}, 'slow');
+			});
+});
+</script>
+
+<div class="row">  
+<div class="large-12 columns">
+<!-- <div class="row">
+<div class="large-12 columns"> -->
+<h5>Retrieve artists their playcounts and images from the Last.fm API. Reads in JSON data from URL and uses jQuery to render the results to HTML.</h5>
+<hr>
+<pre class="prettyprint"> <!-- Pretty print for formatting -->
+$(document).ready(function() { <!-- Sample method for display to user, does not execute -->
+    $.getJSON
+	("YOUR URL HERE", function(json) {
+        var html = '';
+        $.each(json.topartists.artist, function(i, item) {
+        use html here to display the results how you
+	    wish e.g. item.name + item.playcount
+        });
+        $('#result').append(html);
+</pre>
+</div>
+</div>
+
+
+<div class="row">  
+<div class="large-12 columns">
+<!-- <div class="row">
+<div class="large-12 columns"> -->
+<h5>This is how to use the getJSON method to return the JSON data and use JSON 
+stringify to display it as a more readable format as displayed on the following pages.</h5>
+<hr>
+<pre class="prettyprint">
+$.getJSON("YOUR JSON URL HERE", <!-- Sample method for display to user, does not execute -->
+        function(data) {
+	document.getElementById("json")
+    .innerHTML =(JSON.stringify(data, undefined, 1))
+});
+</pre>
+</div>
+</div>
+
+
+<div class="row">  
+<div class="large-12 columns">
+<h5>Artist Similarity. Use the Echo Nest to retrieve similar artists to weezer the first 10 are returned. Requires the latest Echo Nest API Jars and your API key.</h5>
+<hr>
+<pre class="prettyprint">
+ArtistAPI artistAPI = new ArtistAPI(YOUR_API_KEY); <!-- Sample method for display to user, does not execute -->
+
+List&lt;Artist&gt; artists = artistAPI.searchArtist
+(&quot;weezer&quot;, false);
+for (Artist artist : artists) {
+	List&lt;Scored&lt;Artist&gt;&gt; similars = artistAPI.getSimilarArtists(artist, 0, 10);
+	for (Scored&lt;Artist&gt; simArtist : similars) {
+		System.out.println(&quot;   &quot; + simArtist.getItem().getName());
+	}
+} 
+</pre>
+<!-- <script src="js/highlighter/prettify.js"></script>
+<script>prettyPrint();</script> -->
+</div>
+</div>
+
+<div class="row">  
+<div class="large-12 columns">
+<!-- <div class="row">
+<div class="large-12 columns"> -->
+<h5>Artist Audio. Get a list of tracks for The Decemberists limited to the first 15.</h5>
+<hr>
+<pre class="prettyprint">
+ArtistAPI artistAPI = new ArtistAPI(YOUR_API_KEY); <!-- Sample method for display to user, does not execute -->
+
+List&lt;Artist&gt; artists = artistAPI.searchArtist
+("The Decemberists", false);
+for (Artist artist : artists) {
+	DocumentList &lt;Audio&gt; audioList = artistAPI.getAudio(artist, 0, 15);
+	for (Audio audio : audioList.getDocuments()) {
+		System.out.println(audio.toString());
+	}
+}
+</pre>
+</div>
+</div>
+
+<div class="row">  
+<div class="large-12 columns">
+<!-- <div class="row">
+<div class="large-12 columns"> -->
+<h5>Track BPM. Upload a track for analysis which will return the BPM of the track.</h5>
+<hr>
+<pre class="prettyprint">
+TrackAPI trackAPI = new TrackAPI(YOUR_API_KEY); <!-- Sample method for display to user, does not execute -->
+
+String id = trackAPI.uploadTrack(new File
+("/path/to/music/track.mp3"), false);
+AnalysisStatus status = trackAPI.waitForAnalysis(id, 60000);
+if (status == AnalysisStatus.COMPLETE) {
+	System.out.println("Tempo in BPM: " + trackAPI.getTempo(id));
+}  
+}	
+</pre>
+</div>
+</div>
+
+<div class="row">
+<!-- <div class="large-12 columns"> -->
+<h3></h3>
+<ul class="small-block-grid-4"> <!-- Small block grid to resize images that will display horizontally -->
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+<li><img src="img/sm1.png" /></li>
+<li><img src="img/tree_10.png" /></li>
+</ul>
+</div>
+
+<div id="share-buttons"> <!-- Social media buttons -->
+<div class="row">
+<div class="large-6 columns">
+
+<!-- Facebook -->
+<a href="http://www.facebook.com/sharer.php?u=http://soundbranch.net/" target="_blank"><img src="img/facebook.png" alt="Facebook" /></a>
+
+<!-- Twitter -->
+<a href="http://twitter.com/share?url=http://soundbranch.net/&text=SoundBranch&hashtags=SoundBranch.net" target="_blank"><img src="img/twitter.png" alt="Twitter" /></a>
+
+<!-- Google+ -->
+<a href="https://plus.google.com/share?url=http://soundbranch.net/" target="_blank"><img src="img/google.png" alt="Google" /></a>
+
+<!-- LinkedIn -->
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://soundbranch.net/" target="_blank"><img src="img/linkedin.png" alt="LinkedIn" /></a>
+
+<!-- Pinterest -->
+<a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"><img src="img/pinterest.png" alt="Pinterest" /></a>
+
+</div>
+</div>
+</div>
+
+<script>
+document.write('<script src=' +
+		('_proto_' in{} ? 'js/vendor/zepto' : 'js/vendor/jquery')+
+		'.js><\/script>')
+		</script>        
+
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+$(document).foundation();
+</script>
+</section>
+
+<a class="exit-off-canvas"></a>
+</div>
+</div>
+</body>
+</html>
